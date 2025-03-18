@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import TextInput from "../../commons/TextInput";
 import SignInHeader from "../../components/signInHeader";
 import CustomButton from "../../commons/Button";
@@ -6,6 +6,18 @@ import SignInOption from "../../commons/signInOption";
 
 const SignIn = () => {
     const [email, setEmail] = useState("");
+    const [validate, setValidate] = useState(false);
+
+    const validateEmail = (email: string) => {
+        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email regex
+        return regex.test(email);
+    };
+
+    useEffect(() => {
+        // Validate email using regex
+        const isValid = validateEmail(email);
+        setValidate(isValid);
+    }, [email]);
 
     return (
         <div className="h-screen w-full flex flex-col">
@@ -17,8 +29,10 @@ const SignIn = () => {
                     </h2>
                     <div className="py-4">
                         <TextInput
+                            type="signIn"
                             placeHolder="Email"
                             value={email}
+                            validate={validate}
                             onChange={(e) => setEmail(e)}
                         />
                     </div>

@@ -4,12 +4,13 @@ import SignInHeader from "../../components/signInHeader";
 import CustomButton from "../../commons/Button";
 
 const SignUp = () => {
-    const [email, setEmail] = useState("buymeapi.com/");
+    const [username, setUsername] = useState("buymeapi.com/");
 
-    const onEnterEmail = (inputValue: string) => {
+    const onEnterUsername = (inputValue: string) => {
         if (inputValue.length >= "buymeapi.com/".length) {
-            setEmail(inputValue);
+            setUsername(inputValue);
         }
+        // setEmail(inputValue);
     };
 
     return (
@@ -21,9 +22,11 @@ const SignUp = () => {
                     <h4 className="text-slate-500">Choose a username for your page.</h4>
                     <div className="py-4">
                         <TextInput
+                            type="signUp"
                             placeHolder="Email"
-                            value={email}
-                            onChange={(e) => onEnterEmail(e)}
+                            value={username}
+                            validate={true}
+                            onChange={(e) => onEnterUsername(e)}
                         />
                     </div>
                     <div className="py-4">
